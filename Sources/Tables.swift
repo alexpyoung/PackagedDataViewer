@@ -7,6 +7,11 @@
 
 import TextTable
 
+enum SortOrder: String {
+    case ascending = "asc"
+    case descending = "desc"
+}
+
 let eventTable = TextTable<Event> {[
     Column(title: "Timestamp", value: $0.timestamp),
     Column(title: "Event ID", value: $0.id),
