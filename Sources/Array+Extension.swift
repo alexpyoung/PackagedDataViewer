@@ -20,12 +20,12 @@ extension Array where Iterator.Element == Event {
 
     func batchedByStreamID() -> [String:[Event]] {
         var batchedEvents = [String:[Event]]()
-        for event in self {
-            if var streamEvents = batchedEvents[event.streamId] {
-                streamEvents.append(event)
-                batchedEvents[event.streamId] = streamEvents
+        self.forEach {
+            if var streamEvents = batchedEvents[$0.streamId] {
+                streamEvents.append($0)
+                batchedEvents[$0.streamId] = streamEvents
             } else {
-                batchedEvents[event.streamId] = [event]
+                batchedEvents[$0.streamId] = [$0]
             }
         }
         return batchedEvents

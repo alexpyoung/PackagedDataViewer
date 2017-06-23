@@ -28,7 +28,7 @@ func print(_ allEvents: [Event], sorted: SortOrder? = nil, shouldBatch: Bool = f
     }
 
     if shouldBatch {
-        for (_, events) in events.batchedByStreamID() {
+        events.batchedByStreamID().forEach { (_, events) in
             eventTable.print(events, style: Style.psql)
         }
     } else {
