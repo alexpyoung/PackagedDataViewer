@@ -13,6 +13,7 @@ enum SortOrder: String {
 }
 
 let eventTable = TextTable<Event> {[
+    Column(title: "Seq #", value: $0.sequence),
     Column(title: "Timestamp", value: $0.timestamp),
     Column(title: "Event ID", value: $0.id),
     Column(title: "Stream ID", value: $0.streamId)
