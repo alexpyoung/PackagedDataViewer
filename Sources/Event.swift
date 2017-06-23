@@ -19,6 +19,7 @@ struct Event: Model {
 
     let id: String
     let streamId: String
+    let sequence: UInt
     let timestamp: Date
 
     init(blob: SQLite.Blob) throws {
@@ -28,6 +29,7 @@ struct Event: Model {
         }
         guard let id = json["_id"] as? String,
             let streamId = json["stream_id"] as? String,
+            let sequence = json["seq"] as? UInt,
             let timestamp = json["timestamp"] as? String,
             let date = Event.dateFormatter.date(from: timestamp)
         else {
@@ -35,6 +37,7 @@ struct Event: Model {
         }
         self.id = id
         self.streamId = streamId
+        self.sequence = sequence
         self.timestamp = date
     }
 }
