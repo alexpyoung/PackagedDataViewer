@@ -18,3 +18,20 @@ let eventTable = TextTable<Event> {[
     Column(title: "Event ID", value: $0.id),
     Column(title: "Stream ID", value: $0.streamId)
 ]}
+
+func print(_ allEvents: [Event], sorted: SortOrder? = nil, shouldBatch: Bool = false) {
+    let events: [Event]
+    if let sortOrder = sorted {
+        events = allEvents.sortedByTimestamp(sortOrder)
+    } else {
+        events = allEvents
+    }
+
+    if shouldBatch {
+        for (_, events) in events.batchedByStreamID() {
+            eventTable.print(events, style: Style.psql)
+        }
+    } else {
+        eventTable.print(events, style: Style.psql)
+    }
+}
