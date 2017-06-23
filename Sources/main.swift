@@ -3,18 +3,14 @@ import Foundation
 import SQLite
 import TextTable
 
-let cache = Table("cache")
-let data = Expression<SQLite.Blob>("data")
-let type = Expression<String>("_type")
-
-let query = cache
-    .select(data)
-    .filter(type == "event")
 
 command(
-    Argument<String>("file", description: "Path to database file")
-) { filePath in
-    let db = try Connection(filePath)
-    let events = try db.prepare(query).map{ try Event(blob: $0[data]) }
-    eventTable.print()
+    Argument<String>("file", description: "Path to database file"),
+    Option<String>("type", "event", description: "Domain model type to query"),
+    Option<String>("s", "nil", description: "Timestamp sort order"),
+    Option<String>("b", "false", description: "Batch events by stream ID")
+) { filePath, modelType, sortOrderOrNil, isBatchingByStream in
+
+    let events: [Event] = try Connection(filePath).fetchAll(for: modelType)
+    print(events, sorted: SortOrder(rawValue: sortOrderOrNil), shouldBatch: isBatchingByStream == "true")
 }.run()
