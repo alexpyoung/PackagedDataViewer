@@ -21,7 +21,9 @@ let eventTable = TextTable<Event> {[
 
 let streamTable = TextTable<Stream> {[
     Column(title: "Stream ID", value: $0.id ?? ""),
-    Column(title: "Game ID", value: $0.gameId ?? "")
+    Column(title: "Game ID", value: $0.gameId ?? ""),
+    Column(title: "Home Team ID", value: $0.homeId),
+    Column(title: "Away Team ID", value: $0.awayId)
 ]}
 
 func print(_ allEvents: [Event], sorted: SortOrder? = nil, shouldBatch: Bool = false) {
