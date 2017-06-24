@@ -8,7 +8,7 @@ import TextTable
 command(
     Option<String>("type", "event", description: "[event] - Domain model type to query"),
     Option<String>("s", "nil", description: "[asc, desc] - Timestamp sort order"),
-    Option<String>("b", "false", description: "[true, false] - Batch events by stream ID"),
+    Flag("b", description: "[true, false] - Batch events by stream ID", default: false),
     Option<String>("sid", "nil", description: "Stream ID"),
     VariadicArgument<String>("files", description: "Variadic list of paths to database files")
 ) { modelType, sortOrderOrNil, isBatchingByStream, streamIdOrNil, filePaths in
@@ -22,7 +22,7 @@ command(
             print(events, sorted: .ascending, shouldBatch: true)
         } else {
             events = try Connection($0).fetchAll(for: modelType)
-            print(events, sorted: SortOrder(rawValue: sortOrderOrNil), shouldBatch: isBatchingByStream == "true")
+            print(events, sorted: SortOrder(rawValue: sortOrderOrNil), shouldBatch: isBatchingByStream)
         }
     }
 }.run()
