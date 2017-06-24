@@ -10,10 +10,10 @@ extension Array where Iterator.Element == Event {
     func sortedByTimestamp(_ order: SortOrder) -> [Event] {
         return self.sorted {
             switch order {
-            case .ascending:
-                return $0.timestamp < $1.timestamp
-            case .descending:
-                return $0.timestamp > $1.timestamp
+                case .ascending:
+                    return $0.timestamp < $1.timestamp
+                case .descending:
+                    return $0.timestamp > $1.timestamp
             }
         }
     }
@@ -21,12 +21,9 @@ extension Array where Iterator.Element == Event {
     func batchedByStreamID() -> [String:[Event]] {
         var batchedEvents = [String:[Event]]()
         self.forEach {
-            if var streamEvents = batchedEvents[$0.streamId] {
-                streamEvents.append($0)
-                batchedEvents[$0.streamId] = streamEvents
-            } else {
-                batchedEvents[$0.streamId] = [$0]
-            }
+            var events = batchedEvents[$0.streamId] ?? []
+            events.append($0)
+            batchedEvents[$0.streamId] = events
         }
         return batchedEvents
     }
