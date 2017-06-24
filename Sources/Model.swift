@@ -9,5 +9,7 @@ import SQLite
 
 protocol Model {
 
+    var id: String { get }
+
     init(blob: SQLite.Blob) throws
 }
