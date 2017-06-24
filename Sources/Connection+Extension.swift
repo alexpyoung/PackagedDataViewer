@@ -20,4 +20,8 @@ extension Connection {
             .filter(type == typeIdentifier)
         return try self.prepare(query).map{ try T(blob: $0[data]) }
     }
+
+    func fetchEvents(withStreamId streamId: String) throws -> [Event] {
+        return try self.fetchAll(for: "event").filter{ $0.streamId == streamId }
+    }
 }
