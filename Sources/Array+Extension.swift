@@ -8,13 +8,11 @@
 extension Array where Iterator.Element == Event {
 
     func sortedByTimestamp(_ order: SortOrder) -> [Event] {
-        return self.sorted {
-            switch order {
-                case .ascending:
-                    return $0.timestamp < $1.timestamp
-                case .descending:
-                    return $0.timestamp > $1.timestamp
-            }
+        switch order {
+            case .ascending:
+                return self.sorted{ $0.timestamp < $1.timestamp }
+            case .descending:
+                return self.sorted{ $0.timestamp > $1.timestamp }
         }
     }
 
