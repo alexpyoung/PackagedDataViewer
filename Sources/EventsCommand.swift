@@ -11,19 +11,19 @@ import SQLite
 
 let eventsCommand = command(
     Option<String>(
-        "s",
+        "sort",
         "nil",
         description: "[asc, desc] - Timestamp sort order"
     ),
     Flag(
-        "b",
+        "batch",
         description: "[true, false] - Batch events by stream ID",
         default: false
     ),
     Option<String>(
-        "sid",
+        "stream-id",
         "nil",
-        description: "Stream ID"
+        description: "Stream ID to filter by"
     ),
     VariadicArgument<String>(
         "files",
