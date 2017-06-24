@@ -38,7 +38,7 @@ private func execute(
     streamIdOrNil: String,
     filePaths: [String]
 ) throws {
-    try filePaths.forEach{
+    try filePaths.forEach {
         print("Reading \($0)")
         let events: [Event]
         if streamIdOrNil != "nil" {
