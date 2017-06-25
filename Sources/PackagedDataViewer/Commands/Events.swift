@@ -8,6 +8,12 @@
 
 import Commander
 import SQLite
+import TextTable
+
+enum SortOrder: String {
+    case ascending = "asc"
+    case descending = "desc"
+}
 
 let eventsCommand = command(
     Option<String>(
@@ -49,5 +55,22 @@ private func execute(
             events = try Connection($0).fetchAll()
             print(events, sorted: SortOrder(rawValue: sortOrderOrNil), shouldBatch: isBatchingByStream)
         }
+    }
+}
+
+private func print(_ allEvents: [Event], sorted: SortOrder? = nil, shouldBatch: Bool = false) {
+    let events: [Event]
+    if let sortOrder = sorted {
+        events = allEvents.sortedByTimestamp(sortOrder)
+    } else {
+        events = allEvents
+    }
+
+    if shouldBatch {
+        events.batchedByStreamID().forEach { (_, events) in
+            eventTable.print(events, style: Style.psql)
+        }
+    } else {
+        eventTable.print(events, style: Style.psql)
     }
 }
