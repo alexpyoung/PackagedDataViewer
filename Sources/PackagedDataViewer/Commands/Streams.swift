@@ -29,7 +29,16 @@ private func execute(
 ) throws {
     try filePaths.forEach {
         print("Reading \($0)")
-        let streams: [Stream] = try Connection($0).fetchAll()
-        streamTable.print(streams, style: Style.psql)
+        if gameIdOrNil != "nil" {
+            streamTable.print(
+                try Connection($0).fetchStreams(withGameId: gameIdOrNil),
+                style: Style.psql
+            )
+        } else {
+            streamTable.print(
+                try Connection($0).fetchAll(),
+                style: Style.psql
+            )
+        }
     }
 }
