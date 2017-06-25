@@ -46,7 +46,7 @@ private func execute(
             events = try Connection($0).fetchEvents(withStreamId: streamId)
             print(events, sorted: .ascending, shouldBatch: true)
         } else {
-            events = try Connection($0).fetchAll(for: "event")
+            events = try Connection($0).fetchAll()
             print(events, sorted: SortOrder(rawValue: sortOrderOrNil), shouldBatch: isBatchingByStream)
         }
     }

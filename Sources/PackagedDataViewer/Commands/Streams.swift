@@ -28,7 +28,7 @@ private func execute(
 ) throws {
     try filePaths.forEach {
         print("Reading \($0)")
-        let streams: [Stream] = try Connection($0).fetchAll(for: "stream")
+        let streams: [Stream] = try Connection($0).fetchAll()
         streamTable.print(streams, style: Style.psql)
     }
 }

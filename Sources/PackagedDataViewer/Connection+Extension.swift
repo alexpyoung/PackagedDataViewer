@@ -9,19 +9,18 @@ import SQLite
 
 extension Connection {
 
-    // FIXME: Implement some generics wizardry that can grab an identifier from Model
-    func fetchAll<T: Model>(for typeIdentifier: String) throws -> [T] {
+    func fetchAll<T: Model>() throws -> [T] {
         let cache = Table("cache")
         let data = Expression<SQLite.Blob>("data")
         let type = Expression<String>("_type")
 
         let query = cache
             .select(data)
-            .filter(type == typeIdentifier)
+            .filter(type == T.typeIdentifier)
         return try self.prepare(query).map{ try T(blob: $0[data]) }
     }
 
     func fetchEvents(withStreamId streamId: String) throws -> [Event] {
-        return try self.fetchAll(for: "event").filter{ $0.streamId == streamId }
+        return try self.fetchAll().filter{ $0.streamId == streamId }
     }
 }
