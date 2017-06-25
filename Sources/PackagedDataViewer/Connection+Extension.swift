@@ -23,4 +23,8 @@ extension Connection {
     func fetchEvents(withStreamId streamId: String) throws -> [Event] {
         return try self.fetchAll().filter{ $0.streamId == streamId }
     }
+
+    func fetchStreams(withGameId gameId: String) throws -> [Stream] {
+        return try self.fetchAll().filter{ $0.gameId == gameId }
+    }
 }
