@@ -11,8 +11,9 @@ import SQLite
 import TextTable
 
 let streamsCommand = command(
-    Argument<String>(
+    Option<String>(
         "game-id",
+        "nil",
         description: "Game ID to filter by"
     ),
     VariadicArgument<String>(
@@ -23,7 +24,7 @@ let streamsCommand = command(
 )
 
 private func execute(
-    gameId: String,
+    gameIdOrNil: String,
     filePaths: [String]
 ) throws {
     try filePaths.forEach {
