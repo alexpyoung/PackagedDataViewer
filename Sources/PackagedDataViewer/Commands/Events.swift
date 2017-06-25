@@ -46,14 +46,18 @@ private func execute(
 ) throws {
     try filePaths.forEach {
         print("Reading \($0)")
-        let events: [Event]
         if streamIdOrNil != "nil" {
-            let streamId = streamIdOrNil
-            events = try Connection($0).fetchEvents(withStreamId: streamId)
-            print(events, sorted: .ascending, shouldBatch: true)
+            print(
+                try Connection($0).fetchEvents(withStreamId: streamIdOrNil),
+                sorted: .ascending,
+                shouldBatch: true
+            )
         } else {
-            events = try Connection($0).fetchAll()
-            print(events, sorted: SortOrder(rawValue: sortOrderOrNil), shouldBatch: isBatchingByStream)
+            print(
+                try Connection($0).fetchAll(),
+                sorted: SortOrder(rawValue: sortOrderOrNil),
+                shouldBatch: isBatchingByStream
+            )
         }
     }
 }
