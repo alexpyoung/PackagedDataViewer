@@ -16,6 +16,7 @@ struct Event: Model {
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         return formatter
     }()
+    static let typeIdentifier = "event"
 
     let id: String
     let streamId: String
