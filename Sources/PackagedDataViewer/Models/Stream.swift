@@ -10,6 +10,8 @@ import SQLite
 
 struct Stream: Model {
 
+    static let typeIdentifier = "stream"
+
     let id: String?
     let gameId: String?
     let homeId: String
