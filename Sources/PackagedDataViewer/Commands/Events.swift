@@ -78,3 +78,4 @@ private func print(_ allEvents: [Event], sorted: SortOrder? = nil, shouldBatch: 
         eventTable.print(events, style: Style.psql)
     }
 }
+

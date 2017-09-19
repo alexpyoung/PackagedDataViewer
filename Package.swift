@@ -1,12 +1,24 @@
-// swift-tools-version:3.1
+// swift-tools-version:4.0
 
 import PackageDescription
 
 let package = Package(
     name: "PackagedDataViewer",
     dependencies: [
-        .Package(url: "https://github.com/kylef/Commander.git", Version(0,6,1)),
-        .Package(url: "https://github.com/stephencelis/SQLite.swift.git", Version(0, 11, 3)),
-        .Package(url: "https://github.com/alexpyoung/TextTable.git", Version(1, 0, 0, prereleaseIdentifiers: ["alpha", "5"]))
+        .package(url: "https://github.com/kylef/Commander.git", .exact("0.6.0")),
+        // FIXME: Use .upToMinor(from: "0.11.4") once released
+        .package(url: "https://github.com/stephencelis/SQLite.swift.git", .branch("release")),
+        // FIXME: Use 1.0.0-alpha.5
+        .package(url: "https://github.com/alexpyoung/TextTable.git", .branch("master"))
+    ],
+    targets: [
+        .target(
+            name: "PackagedDataViewer",
+            dependencies: [
+                "Commander",
+                "SQLite",
+                "TextTable"
+            ]
+        )
     ]
 )
