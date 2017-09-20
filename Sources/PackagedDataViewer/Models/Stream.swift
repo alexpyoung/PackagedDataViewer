@@ -16,6 +16,7 @@ struct Stream: Model {
     let gameId: String?
     let homeId: String
     let awayId: String
+    let timestamp: Date
 
     init(blob: SQLite.Blob) throws {
         let data = Data(bytes: blob.bytes, count: blob.bytes.count)
@@ -23,7 +24,9 @@ struct Stream: Model {
             throw PackagedDataViewerError.invalidJSONObject
         }
         guard let homeId = json["home_id"] as? String,
-            let awayId = json["away_id"] as? String
+            let awayId = json["away_id"] as? String,
+            let timestamp = json["timestamp"] as? String,
+            let date = Stream.dateFormatter.date(from: timestamp)
         else {
             throw PackagedDataViewerError.invalidJSONProperty
         }
@@ -31,5 +34,6 @@ struct Stream: Model {
         self.gameId = json["game_id"] as? String
         self.homeId = homeId
         self.awayId = awayId
+        self.timestamp = date
     }
 }
