@@ -15,5 +15,5 @@ A command line interface for browsing a gcios SQLite file
 ### Example
 Listing sorted events from multiple files
 ```
-.build/debug/PackagedDataViewer events <path-to-file-0> <path-file-n> --sort asc
+.build/debug/PackagedDataViewer events <path-to-file-0> <path-to-file-n> --sort asc
 ```
