@@ -10,8 +10,8 @@ A command line interface for browsing a gcios SQLite file
 - `swift build -Xlinker -lsqlite3` (See [SQLite.swift](https://github.com/stephencelis/SQLite.swift/blob/master/Documentation/Index.md#swift-package-manager))
 
 ## Usage
-- `./build/debug/PackagedDataViewer --help`
-- `./build/debug/PackagedDataViewer events --help`
+- `.build/debug/PackagedDataViewer --help`
+- `.build/debug/PackagedDataViewer events --help`
 
 ### Example
 Listing sorted events from multiple files
