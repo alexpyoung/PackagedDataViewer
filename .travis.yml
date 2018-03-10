@@ -1,0 +1,27 @@
+language: objective-c
+install:
+  - brew install kylef/formulae/swiftenv
+  - echo 'if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi' >> ~/.bash_profile
+  - echo 'if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi' >> ~/.bash_rc
+  - swiftenv install 4.0
+script:
+  - swift build -Xlinker -lsqlite3 -c release -Xswiftc -static-stdlib
+before_deploy:
+  - cd ./.build/release
+  - TARBALL_FILENAME="PackagedDataViewer-$TRAVIS_TAG.tar.gz"
+  - CHECKSUMS_FILENAME="PackagedDataViewer-$TRAVIS_TAG-checksums.txt"
+  - tar -czf $TARBALL_FILENAME PackagedDataViewer
+  - CHECKSUM=$(shasum -a 256 $TARBALL_FILENAME)
+  - touch $CHECKSUMS_FILENAME
+  - echo $CHECKSUM >> $CHECKSUMS_FILENAME
+  - echo $TARBALL_FILENAME >> $CHECKSUMS_FILENAME
+deploy:
+  on:
+    tags: true
+  skip_cleanup: true
+  overwrite: true
+  file:
+    - $TARBALL_FILENAME
+    - $CHECKSUMS_FILENAME
+  api_key:
+    secure: f7ec908aede4cce967bb40894ffa82cdf67a8da3
