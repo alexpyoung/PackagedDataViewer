@@ -1,6 +1,6 @@
 # PackagedDataViewer
 
-![](https://img.shields.io/badge/swift-4.0-orange.svg)
+[![Build Status](https://travis-ci.org/alexpyoung/PackagedDataViewer.svg?branch=1.0.1)](https://travis-ci.org/alexpyoung/PackagedDataViewer) ![](https://img.shields.io/badge/swift-4.0-orange.svg)
 
 A command line interface for browsing a gcios SQLite file
 
