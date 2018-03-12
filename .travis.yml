@@ -12,5 +12,6 @@ deploy:
   file:
     - .build/release/$TARBALL_FILENAME
     - .build/release/$CHECKSUMS_FILENAME
+  provider: releases
   api_key:
     secure: f7ec908aede4cce967bb40894ffa82cdf67a8da3
