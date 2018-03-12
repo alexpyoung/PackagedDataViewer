@@ -10,7 +10,7 @@ deploy:
   skip_cleanup: true
   overwrite: true
   file:
-    - $TARBALL_FILENAME
-    - $CHECKSUMS_FILENAME
+    - .build/release/$TARBALL_FILENAME
+    - .build/release/$CHECKSUMS_FILENAME
   api_key:
     secure: f7ec908aede4cce967bb40894ffa82cdf67a8da3
