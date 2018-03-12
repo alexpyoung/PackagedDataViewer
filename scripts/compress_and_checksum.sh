@@ -3,7 +3,8 @@
 if [ -z "$TRAVIS_TAG" ]; then
     exit 0
 fi
-cd ../.build/release
+# Run from project root
+cd ./.build/release
 TARBALL_FILENAME="PackagedDataViewer-$TRAVIS_TAG.tar.gz"
 CHECKSUMS_FILENAME="PackagedDataViewer-$TRAVIS_TAG-checksums.txt"
 tar -czf $TARBALL_FILENAME PackagedDataViewer
