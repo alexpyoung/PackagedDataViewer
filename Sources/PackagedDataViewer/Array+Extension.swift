@@ -5,9 +5,9 @@
 //  Created by Alex Young on 6/23/17.
 //
 
-extension Array where Iterator.Element == Event {
+extension Array where Iterator.Element: Model {
 
-    func sortedByTimestamp(_ order: SortOrder) -> [Event] {
+    func sortedByTimestamp(_ order: SortOrder) -> [Element] {
         switch order {
             case .ascending:
                 return self.sorted{ $0.timestamp < $1.timestamp }
@@ -15,6 +15,9 @@ extension Array where Iterator.Element == Event {
                 return self.sorted{ $0.timestamp > $1.timestamp }
         }
     }
+}
+
+extension Array where Iterator.Element == Event {
 
     func batchedByStreamID() -> [String:[Event]] {
         var batchedEvents = [String:[Event]]()
