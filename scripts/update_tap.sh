@@ -6,9 +6,7 @@ cd homebrew-tools/Formula
 FILENAME="packageddataviewer.rb"
 REPO_URL="https://github.com/alexpyoung/PackagedDataViewer"
 
-rm $FILENAME
-touch $FILENAME
-echo "class Packageddataviewer < Formula" >> $FILENAME
+echo "class Packageddataviewer < Formula" > $FILENAME
 echo "  desc \"A CLI for SQLite querying\"" >> $FILENAME
 echo "  homepage \"$REPO_URL\"" >> $FILENAME
 echo "  url \"$REPO_URL/releases/download/$TRAVIS_TAG/$TARBALL_FILENAME\"" >> $FILENAME
