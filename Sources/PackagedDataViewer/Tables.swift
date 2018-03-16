@@ -10,8 +10,8 @@ import TextTable
 let eventTable = TextTable<Event> {[
     Column(title: "Seq #", value: $0.sequence),
     Column(title: "Timestamp", value: $0.timestamp),
-    Column(title: "Event ID", value: $0.id),
-    Column(title: "Stream ID", value: $0.streamId)
+    Column(title: "Event Id", value: $0.id),
+    Column(title: "Stream Id", value: $0.streamId)
 ]}
 
 let streamTable = TextTable<Stream> {[
@@ -20,4 +20,11 @@ let streamTable = TextTable<Stream> {[
     Column(title: "Game Id", value: $0.gameId),
     Column(title: "Home Team Id", value: $0.homeId),
     Column(title: "Away Team Id", value: $0.awayId)
+]}
+
+let teamTable = TextTable<Team> {[
+    Column(title: "Team Id", value: $0.id),
+    Column(title: "Timestamp", value: $0.timestamp),
+    Column(title: "Name", value: $0.name),
+    Column(title: "Status", value: $0.status),
 ]}
