@@ -28,3 +28,10 @@ let teamTable = TextTable<Team> {[
     Column(title: "Name", value: $0.name),
     Column(title: "Status", value: $0.status),
 ]}
+
+let gameTable = TextTable<Game> {[
+    Column(title: "Game Id", value: $0.id),
+    Column(title: "Start time", value: $0.timestamp),
+    Column(title: "Stream Id", value: $0.streamId),
+    Column(title: "Status", value: $0.status),
+]}
