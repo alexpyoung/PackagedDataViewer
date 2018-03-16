@@ -29,3 +29,15 @@ extension Array where Iterator.Element == Event {
         return batchedEvents
     }
 }
+
+extension Array where Iterator.Element == Team {
+
+    func sortedByName(_ order: SortOrder) -> [Team] {
+        switch order {
+            case .ascending:
+                return self.sorted{ $0.name < $1.name }
+            case .descending:
+                return self.sorted{ $0.name > $1.name }
+        }
+    }
+}
