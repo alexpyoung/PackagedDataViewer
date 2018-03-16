@@ -2,7 +2,7 @@ language: objective-c
 osx_image: xcode9.2
 install: source scripts/install.sh
 script:
-  - swift build -Xlinker -lsqlite3 -c release -Xswiftc -static-stdlib
+  - swift build -c release -Xswiftc -static-stdlib
 before_deploy: source scripts/compress_and_checksum.sh
 deploy:
   on:
