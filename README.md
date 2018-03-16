@@ -23,5 +23,5 @@ packageddataviewer events <path-to-file-0> <path-to-file-n> --sort asc
 - `PackagedDataViewer` requires Swift `4.0.x`
     - If necessary, install Swift 4 using `scripts/install.sh`
 - `swift build`
-- `cd ./.build/debug`
-- `PackagedDataViewer --help`
+- `cd .build/debug`
+- `./PackagedDataViewer --help`
