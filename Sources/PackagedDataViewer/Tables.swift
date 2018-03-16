@@ -15,9 +15,9 @@ let eventTable = TextTable<Event> {[
 ]}
 
 let streamTable = TextTable<Stream> {[
-    Column(title: "Stream ID", value: $0.id ?? ""),
+    Column(title: "Stream Id", value: $0.id),
     Column(title: "Timestamp", value: $0.timestamp),
-    Column(title: "Game ID", value: $0.gameId ?? ""),
-    Column(title: "Home Team ID", value: $0.homeId),
-    Column(title: "Away Team ID", value: $0.awayId)
+    Column(title: "Game Id", value: $0.gameId),
+    Column(title: "Home Team Id", value: $0.homeId),
+    Column(title: "Away Team Id", value: $0.awayId)
 ]}

@@ -12,8 +12,8 @@ struct Stream: Model {
 
     static let typeIdentifier = "stream"
 
-    let id: String?
-    let gameId: String?
+    let id: String
+    let gameId: String
     let homeId: String
     let awayId: String
     let timestamp: Date
@@ -23,17 +23,15 @@ struct Stream: Model {
         guard let json = try JSONSerialization.jsonObject(with: data) as? [AnyHashable:AnyHashable] else {
             throw PackagedDataViewerError.invalidJSONObject
         }
-        guard let homeId = json["home_id"] as? String,
-            let awayId = json["away_id"] as? String,
-            let timestamp = json["timestamp"] as? String,
-            let date = Stream.dateFormatter.date(from: timestamp)
+        guard let timestamp = json["timestamp"] as? String,
+              let date = Stream.dateFormatter.date(from: timestamp)
         else {
             throw PackagedDataViewerError.invalidJSONProperty
         }
-        self.id = json["_id"] as? String
-        self.gameId = json["game_id"] as? String
-        self.homeId = homeId
-        self.awayId = awayId
+        self.id = json["_id"] as? String ?? ""
+        self.gameId = json["game_id"] as? String ?? ""
+        self.homeId = json["home_id"] as? String ?? ""
+        self.awayId = json["away_id"] as? String ?? ""
         self.timestamp = date
     }
 }
