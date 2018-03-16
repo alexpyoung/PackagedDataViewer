@@ -13,6 +13,8 @@ protocol Model {
     static var typeIdentifier: String { get }
     static var dateFormatter: DateFormatter { get }
 
+    var timestamp: Date { get }
+
     init(blob: SQLite.Blob) throws
 }
 
