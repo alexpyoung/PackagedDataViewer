@@ -20,6 +20,8 @@ packageddataviewer events <path-to-file-0> <path-to-file-n> --sort asc
 ```
 
 ## Building
-- If necessary, install Swift 4 using `scripts/install.sh`
-- `swift build -Xlinker -lsqlite3` (See [SQLite.swift](https://github.com/stephencelis/SQLite.swift/blob/master/Documentation/Index.md#swift-package-manager))
-- The binary will be in `./.build/debug/PackagedDataViewer`
+- `PackagedDataViewer` requires Swift `4.0.x`
+    - If necessary, install Swift 4 using `scripts/install.sh`
+- `swift build`
+- `cd ./.build/debug`
+- `PackagedDataViewer --help`
