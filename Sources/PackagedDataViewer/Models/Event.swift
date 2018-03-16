@@ -14,7 +14,7 @@ struct Event: Model {
 
     let id: String
     let streamId: String
-    let sequence: UInt
+    let sequence: Int
     let timestamp: Date
 
     init(blob: SQLite.Blob) throws {
@@ -22,17 +22,14 @@ struct Event: Model {
         guard let json = try JSONSerialization.jsonObject(with: data) as? [AnyHashable:AnyHashable] else {
             throw PackagedDataViewerError.invalidJSONObject
         }
-        guard let id = json["_id"] as? String,
-            let streamId = json["stream_id"] as? String,
-            let sequence = json["seq"] as? UInt,
-            let timestamp = json["timestamp"] as? String,
-            let date = Event.dateFormatter.date(from: timestamp)
+        guard let timestamp = json["timestamp"] as? String,
+              let date = Event.dateFormatter.date(from: timestamp)
         else {
             throw PackagedDataViewerError.invalidJSONProperty
         }
-        self.id = id
-        self.streamId = streamId
-        self.sequence = sequence
+        self.id = json["_id"] as? String ?? ""
+        self.streamId = json["stream_id"] as? String ?? ""
+        self.sequence = json["seq"] as? Int ?? -1
         self.timestamp = date
     }
 }
