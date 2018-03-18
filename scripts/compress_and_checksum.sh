@@ -5,6 +5,9 @@ if [ $# -lt 1 ]
     echo 'Cannot continue without a tag'
     exit 2
 fi
+
+TAG=$1
+
 # Run from project root
 cd .build/release
 export TARBALL_FILENAME="PackagedDataViewer-$TAG.tar.gz"
