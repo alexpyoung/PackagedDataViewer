@@ -6,6 +6,7 @@ if [ $# -ge 3 ]
     exit 0
 fi
 
+git config --global user.email 'alexyoung1992@gmail.com'
 git clone git://github.com/alexpyoung/homebrew-tools.git
 cd homebrew-tools/Formula
 
