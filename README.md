@@ -11,17 +11,20 @@ brew install alexpyoung/tools/packageddataviewer
 
 ## Usage
 - `packageddataviewer --help`
-- `packageddataviewer events --help`
+- `packageddataviewer <command> --help`
 
 ### Example
-Listing sorted events from multiple files
+Listing teams sorted by name
 ```
-packageddataviewer events <path-to-file-0> <path-to-file-n> --sort asc
+packageddataviewer teams foo.db bar.db baz.db --sort-key name --sort-order asc
 ```
 
-## Building
+## Development
 - `PackagedDataViewer` requires Swift `4.0.x`
     - If necessary, install Swift 4 using `scripts/install.sh`
+### Sans Xcode
 - `swift build`
-- `cd .build/debug`
-- `./PackagedDataViewer --help`
+- `./.build/debug/PackagedDataViewer --help`
+### With Xcode
+- `swift package generate-xcodeproj`
+- `open PackagedDataViewer.xcodeproj`
