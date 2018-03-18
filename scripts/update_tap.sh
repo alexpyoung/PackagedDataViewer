@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-if [ $# -ge 3 ]
+if [ $# -lt 3 ]
   then
     echo 'Cannot continue without a tag, tarball filename, & checksum'
-    exit 0
+    exit 2
 fi
 
 git config --global user.email 'alexyoung1992@gmail.com'
