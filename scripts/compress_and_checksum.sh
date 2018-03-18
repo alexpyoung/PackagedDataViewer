@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-if [ $# -ge 1 ]
+if [ $# -lt 1 ]
   then
     echo 'Cannot continue without a tag'
-    exit 0
+    exit 2
 fi
 # Run from project root
 cd .build/release
