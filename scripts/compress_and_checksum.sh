@@ -5,8 +5,8 @@ if [ -z "$TRAVIS_TAG" ]; then
 fi
 # Run from project root
 cd ./.build/release
-TARBALL_FILENAME="PackagedDataViewer-$TRAVIS_TAG.tar.gz"
-CHECKSUMS_FILENAME="PackagedDataViewer-$TRAVIS_TAG-checksums.txt"
+export TARBALL_FILENAME="PackagedDataViewer-$TRAVIS_TAG.tar.gz"
+export CHECKSUMS_FILENAME="PackagedDataViewer-$TRAVIS_TAG-checksums.txt"
 tar -czf $TARBALL_FILENAME PackagedDataViewer
 CHECKSUM=$(shasum -a 256 $TARBALL_FILENAME | awk '{printf $1}')
 echo $CHECKSUM > $CHECKSUMS_FILENAME
