@@ -2,17 +2,19 @@
 
 if [ $# -lt 3 ]
   then
-    echo 'Cannot continue without a tag, tarball filename, & checksum'
+    echo 'Cannot continue without a token, tag, tarball filename, & checksum'
     exit 2
 fi
 
-git config --global user.email 'alexyoung1992@gmail.com'
+git config --global user.email 'travis@travis-ci.org'
+git config --global user.name 'Travis CI'
 git clone git://github.com/alexpyoung/homebrew-tools.git
 cd homebrew-tools/Formula
 
-TAG=$1
-TARBALL_FILENAME=$2
-CHECKSUM=$3
+TOKEN=$1
+TAG=$2
+TARBALL_FILENAME=$3
+CHECKSUM=$4
 FILENAME="packageddataviewer.rb"
 REPO_URL="https://github.com/alexpyoung/PackagedDataViewer"
 
@@ -32,4 +34,5 @@ echo "  end" >> $FILENAME
 echo "end" >> $FILENAME
 
 git commit -am "feat(packageddataviewer): $TAG"
-git push origin master
+git remote add origin-ci https://$TOKEN@github.com/alexpyoung/homebrew-tools.git
+git push origin-ci master
