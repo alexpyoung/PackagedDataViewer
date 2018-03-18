@@ -3,7 +3,7 @@ osx_image: xcode9.2
 install: source $TRAVIS_BUILD_DIR/scripts/install.sh
 script:
   - swift build -c release -Xswiftc -static-stdlib
-before_deploy: source $TRAVIS_BUILD_DIR/scripts/compress_and_checksum.sh
+before_deploy: source $TRAVIS_BUILD_DIR/scripts/compress_and_checksum.sh $TRAVIS_TAG
 deploy:
   on:
     tags: true

@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
-if [ -z "$TRAVIS_TAG" ]; then
+if [ $# -ge 1 ]
+  then
+    echo 'Cannot continue without a tag'
     exit 0
 fi
 # Run from project root
 cd .build/release
-export TARBALL_FILENAME="PackagedDataViewer-$TRAVIS_TAG.tar.gz"
-export CHECKSUMS_FILENAME="PackagedDataViewer-$TRAVIS_TAG-checksums.txt"
+export TARBALL_FILENAME="PackagedDataViewer-$TAG.tar.gz"
+export CHECKSUMS_FILENAME="PackagedDataViewer-$TAG-checksums.txt"
 tar -czf $TARBALL_FILENAME PackagedDataViewer
-CHECKSUM=$(shasum -a 256 $TARBALL_FILENAME | awk '{printf $1}')
+export CHECKSUM=$(shasum -a 256 $TARBALL_FILENAME | awk '{printf $1}')
 echo $CHECKSUM > $CHECKSUMS_FILENAME
 echo $TARBALL_FILENAME >> $CHECKSUMS_FILENAME
