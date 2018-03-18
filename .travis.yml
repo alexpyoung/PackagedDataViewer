@@ -1,18 +1,18 @@
 language: objective-c
 osx_image: xcode9.2
-install: source scripts/install.sh
+install: source $TRAVIS_BUILD_DIR/scripts/install.sh
 script:
   - swift build -c release -Xswiftc -static-stdlib
-before_deploy: source scripts/compress_and_checksum.sh
+before_deploy: source $TRAVIS_BUILD_DIR/scripts/compress_and_checksum.sh
 deploy:
   on:
     tags: true
   skip_cleanup: true
   overwrite: true
   file:
-    - "$TRAVIS_BUILD_DIR/.build/release/$TARBALL_FILENAME"
-    - "$TRAVIS_BUILD_DIR/.build/release/$CHECKSUMS_FILENAME"
+    - $TRAVIS_BUILD_DIR/.build/release/$TARBALL_FILENAME
+    - $TRAVIS_BUILD_DIR/.build/release/$CHECKSUMS_FILENAME
   provider: releases
   api_key:
     secure: DyybFYzw/b3rZZ28PK08RTdG+jh97PlYCtb9JulzuE6v2YVfClDene+pTzbrsdfI135VMsNteD+j+NBpJaqa0ul5LQEzVPwb4iND7bLTa3Xz0VctE7Cjk+eXpejMQlWrrHGQ5MwYMhF2sxUxf8GPFcJSf1gtspYl7ktDj+nzsiyMtiQBHZ4XuPLt0CAr8MfXJhVfsaxIGr7ndLJmHo+CX6grxLr3uujeyCqR2sk4NDjILndDP46qsSp48Cg4cY92zHzHB+seThYS7i9f4wE8no3jiEApcXu3xtuIrAGl7u+fodZEKCiTZ4np8x8HGT30NHFM8spa/dHSP+Ykqgx+pEe9rFnCtemyxLF9oBFMHWrb/gBN9utx/OBk27DBV9lto7ML2D8YOZJxz4wANBESgTJ9goRKTu3uEB/0OUajDXnrTTliKtMZIM7E/rNsv5X7A2xc3CMortDoOPKrP8eV4BPIXXKB5sKKmf++ADlrb90QUOkVJowS7LWt4pnTc0q0CDtwk3BpYETrItRchbUnC5eI5gI54T4f+J4VkCr8Zm1y27d5hw4X+atWI1pSV36EnoGlwa84inginiNtjqtqd/rtWEhar91CHALz/Ngx7Yg1t5x8RQ/uaq3PHDejgdvStvf+j9VzTYPiv8Cs+yd1qpjhS3mSkSrUMGw0xZvbSc8=
-after_deploy: source scripts/update_tap.sh
+after_deploy: source $TRAVIS_BUILD_DIR/scripts/update_tap.sh
