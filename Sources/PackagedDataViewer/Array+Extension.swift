@@ -20,13 +20,13 @@ extension Array where Iterator.Element: Model {
 extension Array where Iterator.Element == Event {
 
     func batchedByStreamID() -> [String:[Event]] {
-        var batchedEvents = [String:[Event]]()
-        self.forEach {
-            var events = batchedEvents[$0.streamId] ?? []
-            events.append($0)
-            batchedEvents[$0.streamId] = events
+        return self.reduce([:]) { (result, event) -> [String:[Event]] in
+            var result = result
+            var events = result[event.streamId] ?? []
+            events.append(event)
+            result[event.streamId] = events
+            return result
         }
-        return batchedEvents
     }
 }
 
