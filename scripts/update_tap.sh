@@ -1,29 +1,35 @@
 #!/usr/bin/env bash
 
-write-formula() {
+write_formula() {
     local -r TAG=$1
     local -r TARBALL_FILENAME=$2
     local -r CHECKSUM=$3
     local -r FILENAME='packageddataviewer.rb'
     local -r REPO_URL='https://github.com/alexpyoung/PackagedDataViewer'
 
-    echo 'class Packageddataviewer < Formula' > $FILENAME
-    echo '  desc "A CLI for SQLite querying"' >> $FILENAME
-    echo "  homepage \"$REPO_URL\"" >> $FILENAME
-    echo "  url \"$REPO_URL/releases/download/$TAG/$TARBALL_FILENAME\"" >> $FILENAME
-    echo "  sha256 \"$CHECKSUM\"" >> $FILENAME
-    echo "  version \"$TAG\"" >> $FILENAME
-    echo '  bottle :unneeded' >> $FILENAME
-    echo '  def install' >> $FILENAME
-    echo '    bin.install "packageddataviewer"' >> $FILENAME
-    echo '  end' >> $FILENAME
-    echo '  test do' >> $FILENAME
-    echo '    system "#{bin}/packageddataviewer", "--version"' >> $FILENAME
-    echo '  end' >> $FILENAME
-    echo 'end' >> $FILENAME
+    declare -a STRINGS=(
+        'class Packageddataviewer < Formula'
+        '  desc "A CLI for SQLite querying"'
+        "  homepage $REPO_URL"
+        "  url $REPO_URL/releases/download/$TAG/$TARBALL_FILENAME"
+        "  sha256 $CHECKSUM"
+        "  version $TAG"
+        '  bottle :unneeded'
+        '  def install'
+        '    bin.install "packageddataviewer"'
+        '  end'
+        '  test do'
+        '    system "#{bin}/packageddataviewer", "--version"'
+        '  end'
+        'end'
+    )
+    rm -f $FILENAME
+    for i in "${STRINGS[@]}"; do
+       echo $i >> $FILENAME
+    done
 }
 
-push-git() {
+push_git() {
     local -r TAG=$1
     local -r TOKEN=$2
     git config --global user.email 'travis@travis-ci.org'
@@ -46,8 +52,8 @@ main() {
     git clone git://github.com/alexpyoung/homebrew-tools.git
     cd homebrew-tools/Formula
 
-    write-formula $TAG $TARBALL_FILENAME $CHECKSUM
-    push-git $TAG $TOKEN
+    write_formula $TAG $TARBALL_FILENAME $CHECKSUM
+    push_git $TAG $TOKEN
 }
 
 main $1 $2 $3 $4
