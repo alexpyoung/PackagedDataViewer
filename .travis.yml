@@ -1,22 +1,21 @@
 language: objective-c
 osx_image: xcode9.2
-install: source $TRAVIS_BUILD_DIR/scripts/install.sh
+install: make install
 script:
-  - swift build -c debug
-  - swift build -c release -Xswiftc -static-stdlib
-before_deploy: source $TRAVIS_BUILD_DIR/scripts/compress_and_checksum.sh $TRAVIS_TAG
+  - make build
+before_deploy: make release version=$TRAVIS_TAG
 deploy:
   on:
     tags: true
   skip_cleanup: true
   overwrite: true
+  file_glob: true
   file:
-    - $TRAVIS_BUILD_DIR/.build/release/$TARBALL_FILENAME
-    - $TRAVIS_BUILD_DIR/.build/release/$CHECKSUMS_FILENAME
+    - $TRAVIS_BUILD_DIR/.build/release/"PackagedDataViewer-$TRAVIS_TAG"*
   provider: releases
   api_key:
     secure: XmUnBr6Vltx3rw6TuI/qbux1ONfnCJwsUuT9lLpWlzaJGNhYkL9/xiQ8hbK8HmQrj+RP3lcngf3FLa5nhJg5BqdfKFbWGCvS1e3gVEx7LJeeVjdBnel9medNWr7jV3h04KOisal3IZjiUQlNyBz1IZELVg3d2qx+KyXuhPEy6nRImxDGtHjQGlBGdaAruSJ2U5meTmEVGBAPeh/6h/En4EfzplJV7wgSYt/Qk3s5K9Y7Qqov1btbQ0/WqHotpyT2EV9ogwNDrg7VumlYU6EWlF0jlsUzEQA8U+7ltNtTa2rQeSxRYv+JfP49vVRNbdESUe/AxrG6QT/9i9kBYiym2XYBureJs7EX14/MI07TiSt8tM/5gjWH/JK1sby9hHXMF4j9uFdgu0xb/FIiz1TUejXHFJ3N0En1gT6NTrEw6wbbofYexQxa2Pmp4US5hbTwZZ4zuzRxYU4eyIiDAUVZF6aFMoCGRMxS/Zyn/zfxDDEMdzH3Dcyrb0eqkRnTpA+o2UntO9NxoGw3vnKN9dMnE4W40zDBra0yQBRUnUOEJcs1e7lRWxvVru7KcJV9jPxgEDYFFxjExm4+PBw3KIMP5BSoLJBuUEF43fpc7JdJKP4hdVvhHpKRmBDkQf5XbJGxiElA98A0J8j4/3mSG1MQdqpZbH8Z2vpzYJfSQZdSjUg=
 env:
   global:
     secure: Jx1TaI0lPkFYThzP+JndkigT3MRqd22EQpZS9K3+1atjimLfCET+YRf2tO/00WYO1Mjex5zhZ2jDMhn/F0rhLzB8wzj6i0ZrSuUBYje+n9i80N9o7Gmtz0gzgLhpbjttwdr44vcX7hIQ/QiC49ZAW2OfqmE8s1Yw3bBCv3Q6uen1GXoOr8BQeuu97zuQllCDnkb3wRrVgmknAsl2CcCwBKRtEgh3pwNEJSBJTqvAesMbD8ZSLP04mfbKhDOKTdviq2K562PJbsxChPMkv88vP++59g3QfXRqoWDaspO0Sw5XoouSa2ZGARwrux2wgfsCcFeUDKDLRismjc60Wl3H2eEaAs9l2aQX7cj2lIbswfjhOlWLl10vNgXzGYn0BE1krlg0HA/YtMe8PZpg/hVdas6O/HC1wXgIJyS553+BD7C5wQNllcwzBZhfVKSbMiusXBnCqgqhC+cliDFApis9zp4xAvZAVXS/NTXWeCmb3wUeBnOVIU7UCW0hZQBX+GRwBnJOe2qDN3YANyjxoJY3+XTd76z0lhO/IksAGQbpAoBLBtY5F3HU/f8bA5zKnK/2s1QArAiblz+W5AR+SGWr2q1cSb3WmerUWEABhhkurK+8IG+t5vxEO+SlI8MY5Prwgq06/llOjgFyA4DwD3mh14eBoW+U0fKldCNZAZ736JQ=
-after_deploy: source $TRAVIS_BUILD_DIR/scripts/update_tap.sh $GH_TOKEN $TRAVIS_TAG $TARBALL_FILENAME $CHECKSUM
+after_deploy: make publish version=$TRAVIS_TAG token=$GH_TOKEN

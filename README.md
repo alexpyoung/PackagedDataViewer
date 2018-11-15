@@ -13,18 +13,10 @@ brew install alexpyoung/tools/packageddataviewer
 - `packageddataviewer --help`
 - `packageddataviewer <command> --help`
 
-### Example
-Listing teams sorted by name
+###### Listing teams sorted by name
 ```
 packageddataviewer teams foo.db bar.db baz.db --sort-key name --sort-order asc
 ```
 
 ## Development
-- `PackagedDataViewer` requires Swift `4.0.x`
-    - If necessary, install Swift 4 using `scripts/install.sh`
-### Sans Xcode
-- `swift build`
-- `./.build/debug/PackagedDataViewer --help`
-### With Xcode
-- `swift package generate-xcodeproj`
-- `open PackagedDataViewer.xcodeproj`
+To get started, clone this repository and run `make`. If you would like to use Xcode, run `make xcode`.
